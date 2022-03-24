@@ -52,63 +52,63 @@ Ultrasonic ultrasonic_right(actuator_fb);
 Ultrasonic ultrasonic_down(actuator_sf);
  
 void callback(char* topic, byte* payload, unsigned int length) {
-  Serial.println("Entering Callback");
+//  Serial.println("Entering Callback");
   if (strcmp(topic, "home-assistant/dylan/tank") == 0){
     
-  Serial.print("Message arrived in topic: ");
-  Serial.println(topic);
+//  Serial.print("Message arrived in topic: ");
+//  Serial.println(topic);
  
-  Serial.print("Message:");
+//  Serial.print("Message:");
 
 
 
-  Serial.println(*payload);
+//  Serial.println(*payload);
   output = *payload;
 
   
-  Serial.print("Output: ");
-  Serial.println(output);
-  Serial.println();
-  Serial.println("-----------------------");
+//  Serial.print("Output: ");
+//  Serial.println(output);
+//  Serial.println();
+//  Serial.println("-----------------------");
   
   }
 
   if (strcmp(topic, "home-assistant/dylan/tank/actuator") == 0){
     
-  Serial.print("Message arrived in topic: ");
-  Serial.println(topic);
- 
-  Serial.print("Message:");
-
-
-
-  Serial.println(*payload);
+//  Serial.print("Message arrived in topic: ");
+//  Serial.println(topic);
+// 
+//  Serial.print("Message:");
+//
+//
+//
+//  Serial.println(*payload);
   output2 = *payload;
 
   
-  Serial.print("Output2: ");
-  Serial.println(output2);
-  Serial.println();
-  Serial.println("-----------------------");
+//  Serial.print("Output2: ");
+//  Serial.println(output2);
+//  Serial.println();
+//  Serial.println("-----------------------");
   
   }
   if (strcmp(topic, "home-assistant/dylan/tank/auto") == 0){
     
-  Serial.print("Message arrived in topic: ");
-  Serial.println(topic);
- 
-  Serial.print("Message:");
-
-
-
-  Serial.println(*payload);
+//  Serial.print("Message arrived in topic: ");
+//  Serial.println(topic);
+// 
+//  Serial.print("Message:");
+//
+//
+//
+//  Serial.println(*payload);
   output3 = *payload;
 
   
-  Serial.print("Output: ");
-  Serial.println(output);
-  Serial.println();
-  Serial.println("-----------------------");
+//  Serial.print("Output: ");
+//  Serial.println(output);
+//  Serial.println();
+//  Serial.println("-----------------------");
   
   }
     
@@ -142,7 +142,7 @@ void actuatorOff() {
     digitalWrite(actuator_in1, LOW);
     digitalWrite(actuator_in2, LOW);
     digitalWrite(actuator_en, LOW);
-    Serial.println("OFF ACTUATOR");
+//    Serial.println("OFF ACTUATOR");
 }
 //AUTOMATION FUNCTIONS
 void controlActuator(char direc) {
@@ -150,13 +150,13 @@ void controlActuator(char direc) {
     digitalWrite(actuator_in1, HIGH);
     digitalWrite(actuator_in2, LOW);
     digitalWrite(actuator_en, HIGH);
-    Serial.println("EXTEND ACTUATOR");
+//    Serial.println("EXTEND ACTUATOR");
   }
   else if (direc == 'r') {
     digitalWrite(actuator_in1, LOW);
     digitalWrite(actuator_in2, HIGH);
     digitalWrite(actuator_en, HIGH);
-    Serial.println("RETRACT ACTUATOR");
+//    Serial.println("RETRACT ACTUATOR");
   }
   delay(9000);
   actuatorOff();
@@ -419,77 +419,74 @@ void loop() {
     delay(3000);
 
 
-//      while (ultrasonic_right_cm < 20) {    //Stops when past the stair wall
-//        ultrasonic_right_cm = ultrasonic_right.MeasureInCentimeters();
-//        delay(5);
-//        driveForward(12, 999);
-//      }
-//      delay(1200);        //Block of code turns right, drives forward towards dog bed, turns left, then backs into the stairs
-//      driveForward(0, 0);
-//      delay(1000);
-//      turnRight(40, 1000);
-//      delay(1000);
-//      driveForward(12, 2600);
-//      delay(1000);
-//      turnLeft(40, 1000);
-//      delay(1000);
-//      driveBackward(12, 4000);
-////
-////
-//      driveBackward(60, 400);   //Angles up the stairs
-//      upStairs();
-//
-//      driveBackward(15, 3000);
-//      turnLeft(38, 1000);
-//      driveForward(15, 8000);
-//      delay(5000);
-//      driveBackward(15, 8500);
-//      turnRight(40, 1000);
-//      while (ultrasonic_down_cm < 18 || ultrasonic_down_cm == 527) {    //Stops when past the first stair
-//        ultrasonic_down_cm = ultrasonic_down.MeasureInCentimeters();
-//        delay(5);
-//        driveForward(13, 999);
-//      }    
-//      driveForward(0, 0);
-//
-////      while (ultrasonic_down_cm < 18 || ultrasonic_down_cm == 527) {    //Stops when past the first stair
-////        ultrasonic_down_cm = ultrasonic_down.MeasureInCentimeters();
-////        delay(5);
-////        driveForward(13, 999);
-////      }
-////      driveForward(0, 0);
-//      delay(500);
-//      controlActuator('e');
-//      driveForward(15,300);
-//      delay(800);
-//      controlActuator('r');
-//      driveForward(15,460);
-//      driveBackward(12, 1000);
-//      downStairs();
-
-
-      driveForward(15, 2000);
-      delay(500);
-      turnRight(45, 1000);
-      delay(500);
-      while (ultrasonic_right_cm < 180 || ultrasonic_right_cm == 527 || ultrasonic_right_cm == 520) {    //Stops when past the first stair
+      while (ultrasonic_right_cm < 20) {    //Stops when past the stair wall
         ultrasonic_right_cm = ultrasonic_right.MeasureInCentimeters();
         delay(5);
-        Serial.println(ultrasonic_right_cm);
-        driveBackward(13, 999);
+        driveForward(12, 999);
+      }
+      delay(1200);        //Block of code turns right, drives forward towards dog bed, turns left, then backs into the stairs
+      driveForward(0, 0);
+      delay(1000);
+      turnRight(40, 1000);
+      delay(1000);
+      driveForward(12, 2600);
+      delay(1000);
+      turnLeft(40, 1000);
+      delay(1000);
+      driveBackward(12, 4000);
+//
+//
+      driveBackward(60, 350);   //Angles up the stairs
+      upStairs();
+
+      driveBackward(15, 3000);
+      turnLeft(38, 1000);
+      driveForward(15, 8000);
+      delay(5000);
+      driveBackward(15, 8500);
+      turnRight(40, 1000);
+      while (ultrasonic_down_cm < 18 || ultrasonic_down_cm == 527) {    //Stops when past the first stair
+        ultrasonic_down_cm = ultrasonic_down.MeasureInCentimeters();
+        delay(5);
+        driveForward(13, 999);
       }    
-      driveBackward(0, 0);
+      driveForward(0, 0);
+
       delay(500);
-      turnLeft(45, 1000);
+      controlActuator('e');
+      driveForward(15,300);
+      delay(800);
+      controlActuator('r');
+      driveForward(15,460);
+      driveBackward(12, 1000);
+      downStairs();
+
+
+      driveForward(15, 1000);
       delay(500);
-      driveBackward(15, 5000);
-//    driveBackward(15, 2000);    //Backs into the charging plate, turning to stay leaning on the wall
-//    turnLeft(30, 200);
-//    driveBackward(15, 2000);
-//    turnLeft(30, 200);
-//    driveBackward(15, 2000);
-//    turnLeft(30, 200);
-//    driveBackward(12, 4000);
+      turnRight(38, 900);
+      delay(500);
+//      while (ultrasonic_right_cm < 180 || ultrasonic_right_cm == 527 || ultrasonic_right_cm == 520) {    //Stops when past the first stair
+//        ultrasonic_right_cm = ultrasonic_right.MeasureInCentimeters();
+//        delay(5);
+//        Serial.println(ultrasonic_right_cm);
+//        driveBackward(13, 999);
+//      }    
+//      driveBackward(0, 0);
+      driveForward(13, 4000);
+      delay(500);
+      driveBackward(13, 5500);
+      delay(500);
+      turnLeft(40, 900);
+      delay(500);
+      driveBackward(15, 10000);
+    driveBackward(15, 2000);    //Backs into the charging plate, turning to stay leaning on the wall
+    turnLeft(30, 200);
+    driveBackward(15, 2000);
+    turnLeft(30, 200);
+    driveBackward(15, 2000);
+    turnLeft(30, 200);
+    driveBackward(12, 2000);
     
       
     //END AUTO MODE
@@ -524,26 +521,26 @@ void loop() {
   client.loop();
   int dig_1 = 0;
   int dig_2 = 0;
-  Serial.print("Output: ");
-  Serial.println(output);
+//  Serial.print("Output: ");
+//  Serial.println(output);
   if (output == 48 || output == 0) {
     Serial.println("Entering Deep Sleep");
     digitalWrite(RELAY, LOW);
     ledBlink(2, 100);
-    Serial.print("Output: ");
-    Serial.println(output);
-    Serial.println("INFO: Closing the MQTT connection");
+//    Serial.print("Output: ");
+//    Serial.println(output);
+//    Serial.println("INFO: Closing the MQTT connection");
     client.disconnect();
-    Serial.println("INFO: Closing the Wifi connection");
+//    Serial.println("INFO: Closing the Wifi connection");
     WiFi.disconnect();
     while (client.connected() || (WiFi.status() == WL_CONNECTED))
 
     {
-      Serial.println("Waiting for shutdown before sleeping");
+//      Serial.println("Waiting for shutdown before sleeping");
       delay(10);
     }
     delay(100);
-    Serial.println("Starting Sleep Now");
+//    Serial.println("Starting Sleep Now");
     esp_deep_sleep_start();
     delay(500);
   } 
