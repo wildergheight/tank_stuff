@@ -209,14 +209,21 @@ void turnLeft(int speed_percentage, int duration) {
 void upStairs() { // START WITH VEHICLE ANGLED ON BOTTOM STAIR
   for (int i = 0; i <= 15; i++) {
     controlActuator('e');
+    delay(20);
     driveBackward(40,900);
+    delay(20);
     controlActuator('r');
+    delay(20);
     driveBackward(30,300);
+    delay(20);
   }
   controlActuator('e');
-  driveBackward(40,400);
+  delay(20);
+  driveBackward(40,200);
   driveBackward(30,200);
   driveBackward(20,200);
+  driveBackward(15,600);
+  delay(20);
   controlActuator('r');
 }
 
@@ -231,15 +238,22 @@ void forwardUntilStair(int power) {
 }
 void downStairs() { // START WITH VEHICLE ABOVE TOP STEP, WITH ACTUATOR FREE TO LOWER 
   for (int i = 0; i < 16; i++) {
-    forwardUntilStair(13);
+//    forwardUntilStair(13);
     controlActuator('e');
-    driveForward(16,440);
+    delay(20);
+    driveForward(16,405);   //440
     delay(800);
     controlActuator('r');
-    driveForward(16,480);
-    driveBackward(12, 1000);
+    delay(20);
+    driveForward(16,445);   //480
+    delay(20);
+    driveBackward(18, 1000);
+    delay(20);
+    turnLeft(40, 60);
+    delay(20);
+    driveBackward(18, 1000);
     delay(400);
-    forwardUntilStair(13);
+//    forwardUntilStair(13);
 
     delay(800);
   }
@@ -407,10 +421,11 @@ void loop() {
   loop_counter++;
   ultrasonic_right_cm = ultrasonic_right.MeasureInCentimeters();
   ultrasonic_down_cm = ultrasonic_down.MeasureInCentimeters();
-  Serial.print("CM Right: ");
-  Serial.println(ultrasonic_right_cm);
-  Serial.print("CM Down: ");
-  Serial.println(ultrasonic_down_cm);
+//  Serial.print("CM Right: ");
+//  Serial.println(ultrasonic_right_cm);
+//  Serial.print("CM Down: ");
+//  Serial.println(ultrasonic_down_cm);
+
   
   if (output3 == 49 && auto_mode_flag == 0) {
                                                                 //AUTO MODE
@@ -418,33 +433,36 @@ void loop() {
     ledBlink(3, 500);
     delay(3000);
 
-
+      driveForward(14, 10000);
+      delay(6000);
       while (ultrasonic_right_cm < 20) {    //Stops when past the stair wall
         ultrasonic_right_cm = ultrasonic_right.MeasureInCentimeters();
         delay(5);
-        driveForward(12, 999);
+        driveForward(13, 999);
       }
       delay(1200);        //Block of code turns right, drives forward towards dog bed, turns left, then backs into the stairs
       driveForward(0, 0);
       delay(1000);
       turnRight(40, 1000);
       delay(1000);
-      driveForward(12, 2600);
+      driveForward(13, 2600);
       delay(1000);
       turnLeft(40, 1000);
       delay(1000);
-      driveBackward(12, 4000);
+      driveBackward(13, 4000);
 //
 //
-      driveBackward(60, 350);   //Angles up the stairs
+      driveBackward(60, 370);   //Angles up the stairs
+      delay(600);
       upStairs();
 
       driveBackward(15, 3000);
       turnLeft(38, 1000);
       driveForward(15, 8000);
-      delay(5000);
-      driveBackward(15, 8500);
-      turnRight(40, 1000);
+      delay(8000);
+      driveBackward(15, 9500);
+      turnRight(38, 1100);
+      delay(1000);
       while (ultrasonic_down_cm < 18 || ultrasonic_down_cm == 527) {    //Stops when past the first stair
         ultrasonic_down_cm = ultrasonic_down.MeasureInCentimeters();
         delay(5);
@@ -458,26 +476,19 @@ void loop() {
       delay(800);
       controlActuator('r');
       driveForward(15,460);
-      driveBackward(12, 1000);
+      driveBackward(18, 1000);
       downStairs();
 
 
-      driveForward(15, 1000);
+      driveForward(15, 1500);
       delay(500);
-      turnRight(38, 900);
+      turnRight(40, 1000);
       delay(500);
-//      while (ultrasonic_right_cm < 180 || ultrasonic_right_cm == 527 || ultrasonic_right_cm == 520) {    //Stops when past the first stair
-//        ultrasonic_right_cm = ultrasonic_right.MeasureInCentimeters();
-//        delay(5);
-//        Serial.println(ultrasonic_right_cm);
-//        driveBackward(13, 999);
-//      }    
-//      driveBackward(0, 0);
       driveForward(13, 4000);
       delay(500);
-      driveBackward(13, 5500);
+      driveBackward(13, 6500);
       delay(500);
-      turnLeft(40, 900);
+      turnLeft(40, 950);
       delay(500);
       driveBackward(15, 10000);
     driveBackward(15, 2000);    //Backs into the charging plate, turning to stay leaning on the wall
@@ -486,7 +497,7 @@ void loop() {
     turnLeft(30, 200);
     driveBackward(15, 2000);
     turnLeft(30, 200);
-    driveBackward(12, 2000);
+    driveBackward(13, 6000);
     
       
     //END AUTO MODE
